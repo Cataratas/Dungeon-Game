@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d81b593635af8a4693ee7c2cff227b7, type: 3}
+  m_Name: bigRoom
+  m_EditorClassIdentifier: 
+  minRoomWidth: 11
+  minRoomHeight: 11
+  maxRoomWidth: 16
+  maxRoomHeight: 16
+  offset: 4
