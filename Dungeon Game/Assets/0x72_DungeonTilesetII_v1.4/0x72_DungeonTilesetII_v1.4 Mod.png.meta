@@ -11373,6 +11373,48 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: 0x72_DungeonTilesetII_v1.4 Mod_538
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd20f8d0f3b6d614e8852856338e0fce
+      internalID: -1329488106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0x72_DungeonTilesetII_v1.4 Mod_539
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c647a6bb6241eb040bc7ad98fb6dfa63
+      internalID: -422119419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: 0x72_DungeonTilesetII_v1.4 Mod_536
       rect:
         serializedVersion: 2
@@ -11387,7 +11429,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc8b60f2f0a77a044a55197521cd08a0
+      spriteID: 5eca9a8ac078d4a40917ec29c50b185b
       internalID: 922469672
       vertices: []
       indices: 
@@ -11408,7 +11450,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d607e05f1ac5184bb34880eea89a7fa
+      spriteID: e96c4c6b6bd81d84f941e0d40e101e8b
       internalID: 737429371
       vertices: []
       indices: 
@@ -11913,6 +11955,8 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.4 Mod_535: 1667238850
       0x72_DungeonTilesetII_v1.4 Mod_536: 922469672
       0x72_DungeonTilesetII_v1.4 Mod_537: 737429371
+      0x72_DungeonTilesetII_v1.4 Mod_538: -1329488106
+      0x72_DungeonTilesetII_v1.4 Mod_539: -422119419
       0x72_DungeonTilesetII_v1.4 Mod_54: 138654688
       0x72_DungeonTilesetII_v1.4 Mod_55: -392090942
       0x72_DungeonTilesetII_v1.4 Mod_56: 741380593

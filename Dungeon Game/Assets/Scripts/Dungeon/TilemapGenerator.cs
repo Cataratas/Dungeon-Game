@@ -24,7 +24,7 @@ namespace Dungeon {
         }
 
         public void paintSingleWall(Vector2Int pos, int type) {
-            paintSingleTile(wallTilemap, newWallTiles[type], pos);
+            paintSingleTile(wallTilemap, wallTiles[type], pos);
         }
 
         public void clear() {

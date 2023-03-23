@@ -30,8 +30,8 @@ namespace Dungeon
             generateHallways(dungeon);
             
             tilemapGenerator.paintFloorTiles(dungeon.getFloors());
-            //DungeonWallGenerator.createWalls(dungeon.getFloors(), tilemapGenerator);
-            WallGenerator.generateWalls(dungeon.getFloors(), tilemapGenerator);
+            DungeonWallGenerator.createWalls(dungeon.getFloors(), tilemapGenerator);
+            //WallGenerator.generateWalls(dungeon.getFloors(), tilemapGenerator);
         }
 
         protected void generateHallways(Dungeon dungeon) {
