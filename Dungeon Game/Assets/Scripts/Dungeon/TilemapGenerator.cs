@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
@@ -8,13 +7,10 @@ namespace Dungeon {
     public class TilemapGenerator : MonoBehaviour {
         [SerializeField] public Tilemap floorTilemap, wallTilemap;
         [SerializeField] public List<TileBase> floorTiles, wallTiles;
-        [SerializeField] public List<TileBase> newWallTiles;
 
         public void paintFloorTiles(IEnumerable<Vector2Int> tiles) {
             foreach (var tile in tiles) {
-                var tileBase = 0;
-                if (Random.value <= 0.03f)
-                    tileBase = Random.Range(1, floorTiles.Count);
+                int tileBase = Random.value <= 0.03f ? Random.Range(1, floorTiles.Count) : 0;
                 paintSingleTile(floorTilemap, floorTiles[tileBase], tile);
             }
         }
