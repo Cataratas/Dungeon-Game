@@ -13,10 +13,10 @@ namespace Dungeon
         [SerializeField] protected Vector2Int size = new Vector2Int(100, 100);
         [SerializeField] protected int roomQuantity = 25;
         [SerializeField] protected List<RoomParameters> roomParameters;
-        [SerializeField] protected int hallwayWidth = 1;
-        [SerializeField] [Range(0, 1)] protected double percentageOfEdges = 0.1;
         [SerializeField] protected int seed;
         //[SerializeField] protected string seed;
+        private const int HallwayWidth = 3;
+        private const double PercentageOfEdges = .08;
 
         protected override void runProceduralGeneration() {
             var dungeon = new Dungeon();
@@ -29,11 +29,28 @@ namespace Dungeon
 
             generateRooms(dungeon);
             generateHallways(dungeon);
+
+            var tiles = dungeon.getFloors();
+            tilemapGenerator.paintFloorTiles(tiles);
+            WallGenerator.generateWalls(tiles, tilemapGenerator);
             
-            tilemapGenerator.paintFloorTiles(dungeon.getFloors());
-            WallGenerator.generateWalls(dungeon.getFloors(), tilemapGenerator);
+            generateSpikes(dungeon, tiles);
         }
 
+        protected void generateSpikes(Dungeon dungeon, HashSet<Vector2Int> floor) {
+            foreach (var tile in dungeon.hallways) {
+                if (!(UnityEngine.Random.value <= .02f) || dungeon.collideWithRooms(tile))
+                    continue;
+                foreach (var dir in new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right }) {
+                    if (floor.Contains(tile + dir) || floor.Contains(tile + dir * (-1 * HallwayWidth)))
+                        continue;
+                    for (var i = 0; i < HallwayWidth; i++) {
+                        tilemapGenerator.paintSingleTile(tilemapGenerator.floorTilemap, tilemapGenerator.floorTiles[4], tile + dir * (-1 * i));
+                    }
+                }
+            }
+        }
+        
         protected void generateHallways(Dungeon dungeon) {
             var triangles = BowyerWatson.Triangulate(dungeon.centers);
             var graph = new HashSet<Edge>();
@@ -43,15 +60,12 @@ namespace Dungeon
             var tree = Kruskal.MinimumSpanningTree(graph);
 
             var graphList = graph.Except(tree).ToList();
-            var numElements = (int) Math.Round(graphList.Count * percentageOfEdges);
+            var numElements = (int) Math.Round(graphList.Count * PercentageOfEdges);
             var selectedList = new List<Edge>();
 
             while (selectedList.Count < numElements)
                 selectedList.Add(graphList[UnityEngine.Random.Range(0, graphList.Count)]);
-
-            foreach (var edge in selectedList) {
-                tree.Add(edge);
-            }
+            tree.AddRange(selectedList);
 
             foreach (var edge in tree) {
                 var p1 = new Vector3(edge.a.x, edge.a.y);
@@ -70,26 +84,26 @@ namespace Dungeon
             var y = start.y;
             if (Mathf.Abs(dx) > Mathf.Abs(dy)) {
                 while (x != end.x) {
-                    for (var i = 0; i < hallwayWidth; i++) {
+                    for (var i = 0; i < HallwayWidth; i++) {
                         hallway.Add(new Vector2Int(x, y + i * yStep));
                     }
                     x += xStep;
                 }
                 while (y != end.y) {
-                    for (var i = 0; i < hallwayWidth; i++) {
+                    for (var i = 0; i < HallwayWidth; i++) {
                         hallway.Add(new Vector2Int(x + i * xStep, y));
                     }
                     y += yStep;
                 }
             } else {
                 while (y != end.y) {
-                    for (var i = 0; i < hallwayWidth; i++) {
+                    for (var i = 0; i < HallwayWidth; i++) {
                         hallway.Add(new Vector2Int(x + i * xStep, y));
                     }
                     y += yStep;
                 }
                 while (x != end.x) {
-                    for (var i = 0; i < hallwayWidth; i++) {
+                    for (var i = 0; i < HallwayWidth; i++) {
                         hallway.Add(new Vector2Int(x, y + i * yStep));
                     }
                     x += xStep;

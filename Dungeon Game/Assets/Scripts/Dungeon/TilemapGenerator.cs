@@ -10,11 +10,11 @@ namespace Dungeon {
 
         public void paintFloorTiles(IEnumerable<Vector2Int> tiles) {
             foreach (var tile in tiles) {
-                int tileBase = Random.value <= 0.03f ? Random.Range(1, floorTiles.Count) : 0;
+                int tileBase = Random.value <= 0.03f ? Random.Range(1, 3) : 0;
                 paintSingleTile(floorTilemap, floorTiles[tileBase], tile);
             }
         }
-        private static void paintSingleTile(Tilemap tilemap, TileBase tileBase, Vector2Int position) {
+        public void paintSingleTile(Tilemap tilemap, TileBase tileBase, Vector2Int position) {
             var tilePosition = tilemap.WorldToCell((Vector3Int) position);
             tilemap.SetTile(tilePosition, tileBase);
         }

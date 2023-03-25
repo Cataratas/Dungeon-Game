@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 namespace Dungeon {
@@ -60,7 +61,9 @@ namespace Dungeon {
                 } else if ((floor.Contains(leftDown) || floor.Contains(leftDown + Vector2Int.down)) && !floor.Contains(down + Vector2Int.down)) {
                     if (floor.Contains(down + Vector2Int.down + Vector2Int.down)) {
                         walls.Add(new Wall(down, 34));
-                    } else
+                    } else if (floor.Contains(down + Vector2Int.down + Vector2Int.down + Vector2Int.right) && !floor.Contains(down + Vector2Int.down + Vector2Int.right))
+                        walls.Add(new Wall(down, 29)); // 525
+                    else
                         walls.Add(new Wall(down, 12));
                     walls.Add(new Wall(tile, 13));
                 } else if (!floor.Contains(down + Vector2Int.down)) {

@@ -10,7 +10,7 @@ namespace Dungeon {
 
         protected class Dungeon {
             private readonly List<Room> rooms = new List<Room>();
-            private readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
+            public readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
             public readonly HashSet<Point> centers = new HashSet<Point>();
 
             public void AddRoom(Room room) {
@@ -22,8 +22,12 @@ namespace Dungeon {
                 hallways.UnionWith(hallway);
             }
 
-            public bool collidesWithRooms(HashSet<Vector2Int> obj) {
-                return rooms.Any(room => room.floors.Overlaps(obj));
+            public bool collidesWithRooms(HashSet<Vector2Int> tiles) {
+                return rooms.Any(room => room.floors.Overlaps(tiles));
+            }
+
+            public bool collideWithRooms(Vector2Int tile) {
+                return rooms.Any(room => room.floors.Contains(tile));
             }
 
             public HashSet<Vector2Int> getFloors() {
