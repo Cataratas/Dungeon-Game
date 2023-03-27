@@ -27,18 +27,18 @@ namespace Dungeon {
 
             generateRooms(dungeon);
             generateHallways(dungeon);
-            spawnPlayer(dungeon);
 
             var tiles = dungeon.getFloors();
             tilemapGenerator.paintFloorTiles(tiles);
             WallGenerator.generateWalls(tiles, tilemapGenerator);
             
             generateSpikes(dungeon, tiles);
+            spawnPlayer(dungeon);
         }
 
         protected static void spawnPlayer(Dungeon dungeon) {
-            foreach (var room in dungeon.rooms.Where(room => room.parameters.canPlayerSpawn)) {
-                // Spawn player
+            foreach (var room in dungeon.rooms.Where(room => room.parameters.playerCanSpawn)) {
+                FindAnyObjectByType<Player>().setPos(room.center);
                 break;
             }
         }

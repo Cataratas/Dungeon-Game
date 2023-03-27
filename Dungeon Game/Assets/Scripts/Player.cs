@@ -1,3 +1,4 @@
+using DungeonGen;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -17,7 +18,7 @@ public class Player : MonoBehaviour {
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
 
-    public void setPos(Vector2 pos) {
+    public void setPos(Point pos) {
         transform.position = new Vector3(pos.x, pos.y);
     }
 }

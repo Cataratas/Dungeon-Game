@@ -12,6 +12,6 @@ namespace Dungeon.Data {
         public int offset;
 
         [Header("Parameters")]
-        public bool canPlayerSpawn;
+        public bool playerCanSpawn;
     }
 }
