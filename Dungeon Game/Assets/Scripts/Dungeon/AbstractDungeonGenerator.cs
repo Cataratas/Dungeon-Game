@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Dungeon.Data;
 using UnityEngine;
 using DungeonGen;
 
@@ -9,7 +10,7 @@ namespace Dungeon {
         [SerializeField] protected Vector2Int startPos = Vector2Int.zero;
 
         protected class Dungeon {
-            private readonly List<Room> rooms = new List<Room>();
+            public readonly List<Room> rooms = new List<Room>();
             public readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
             public readonly HashSet<Point> centers = new HashSet<Point>();
 
@@ -43,6 +44,7 @@ namespace Dungeon {
         protected class Room {
             public HashSet<Vector2Int> floors = new HashSet<Vector2Int>();
             public Point center;
+            public RoomParameters parameters;
         }
 
         public void generateDungeon() {

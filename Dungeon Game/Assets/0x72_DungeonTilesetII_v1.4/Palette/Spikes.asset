@@ -12,9 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
   m_Name: Spikes
   m_EditorClassIdentifier: 
-  m_AnimatedSprites: []
-  m_MinSpeed: 1
-  m_MaxSpeed: 1
+  m_AnimatedSprites:
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -858391391, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -1549154216, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 690512343, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: 690512343, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  - {fileID: -1549154216, guid: 485f332aa317ba64bb5f099279257546, type: 3}
+  m_MinSpeed: 10
+  m_MaxSpeed: 10
   m_AnimationStartTime: 0
   m_AnimationStartFrame: 0
   m_TileColliderType: 0

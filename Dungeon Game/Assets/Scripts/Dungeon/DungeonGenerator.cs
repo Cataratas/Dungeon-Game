@@ -6,10 +6,8 @@ using Dungeon.Data;
 using DungeonGen;
 using Debug = UnityEngine.Debug;
 
-namespace Dungeon
-{
-    public class DungeonGenerator : AbstractDungeonGenerator
-    {
+namespace Dungeon {
+    public class DungeonGenerator : AbstractDungeonGenerator {
         [SerializeField] protected Vector2Int size = new Vector2Int(100, 100);
         [SerializeField] protected int roomQuantity = 25;
         [SerializeField] protected List<RoomParameters> roomParameters;
@@ -29,6 +27,7 @@ namespace Dungeon
 
             generateRooms(dungeon);
             generateHallways(dungeon);
+            spawnPlayer(dungeon);
 
             var tiles = dungeon.getFloors();
             tilemapGenerator.paintFloorTiles(tiles);
@@ -37,15 +36,28 @@ namespace Dungeon
             generateSpikes(dungeon, tiles);
         }
 
+        protected static void spawnPlayer(Dungeon dungeon) {
+            foreach (var room in dungeon.rooms.Where(room => room.parameters.canPlayerSpawn)) {
+                // Spawn player
+                break;
+            }
+        }
+
         protected void generateSpikes(Dungeon dungeon, HashSet<Vector2Int> floor) {
             foreach (var tile in dungeon.hallways) {
                 if (!(UnityEngine.Random.value <= .02f) || dungeon.collideWithRooms(tile))
                     continue;
                 foreach (var dir in new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right }) {
-                    if (floor.Contains(tile + dir) || floor.Contains(tile + dir * (-1 * HallwayWidth)))
-                        continue;
-                    for (var i = 0; i < HallwayWidth; i++) {
-                        tilemapGenerator.paintSingleTile(tilemapGenerator.floorTilemap, tilemapGenerator.floorTiles[4], tile + dir * (-1 * i));
+                    if (!floor.Contains(tile + dir * 2) && !floor.Contains(tile + dir * -2)) {
+                        for (int i = -1; i < HallwayWidth - 1; i++) {
+                            tilemapGenerator.paintSingleTile(tilemapGenerator.floorTilemap, tilemapGenerator.floorTiles[4], tile + dir * (-1 * i));
+                        }
+                    } else {
+                        if (floor.Contains(tile + dir) || floor.Contains(tile + dir * (-1 * HallwayWidth)))
+                            continue;
+                        for (var i = 0; i < HallwayWidth; i++) {
+                            tilemapGenerator.paintSingleTile(tilemapGenerator.floorTilemap, tilemapGenerator.floorTiles[4], tile + dir * (-1 * i));
+                        }
                     }
                 }
             }
@@ -74,14 +86,14 @@ namespace Dungeon
             }
         }
 
-        private IEnumerable<Vector2Int> generateHallway(Vector2Int start, Vector2Int end) {
+        private static IEnumerable<Vector2Int> generateHallway(Vector2Int start, Vector2Int end) {
             var hallway = new HashSet<Vector2Int>();
-            var dx = end.x - start.x;
-            var dy = end.y - start.y;
-            var xStep = dx > 0 ? 1 : -1;
-            var yStep = dy > 0 ? 1 : -1;
-            var x = start.x;
-            var y = start.y;
+            int dx = end.x - start.x;
+            int dy = end.y - start.y;
+            int xStep = dx > 0 ? 1 : -1;
+            int yStep = dy > 0 ? 1 : -1;
+            int x = start.x;
+            int y = start.y;
             if (Mathf.Abs(dx) > Mathf.Abs(dy)) {
                 while (x != end.x) {
                     for (var i = 0; i < HallwayWidth; i++) {
@@ -162,6 +174,7 @@ namespace Dungeon
             }
             room.center = new Point(roomPos.x + 1, roomPos.y);
             room.floors = floor;
+            room.parameters = p;
             return room;
         }
     }

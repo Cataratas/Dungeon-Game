@@ -16,4 +16,8 @@ public class Player : MonoBehaviour {
     private void Update() {
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
     }
+
+    public void setPos(Vector2 pos) {
+        transform.position = new Vector3(pos.x, pos.y);
+    }
 }
