@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
-using DungeonGen;
 
 public class Test : MonoBehaviour
 {

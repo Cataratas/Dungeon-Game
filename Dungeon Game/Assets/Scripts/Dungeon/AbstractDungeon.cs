@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dungeon.Data;
+using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
-using DungeonGen;
 
 namespace Dungeon {
     public abstract class AbstractDungeonGenerator : MonoBehaviour {
-        [SerializeField] protected TilemapGenerator tilemapGenerator;
-        [SerializeField] protected Vector2Int startPos = Vector2Int.zero;
-
+        [SerializeField] protected TilemapVisualizer tilemap;
+        protected static Vector2Int startPos = new Vector2Int(10, 10);
         protected class Dungeon {
             public readonly List<Room> rooms = new List<Room>();
             public readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
@@ -48,7 +47,7 @@ namespace Dungeon {
         }
 
         public void generateDungeon() {
-            tilemapGenerator.clear();
+            tilemap.clear();
             runProceduralGeneration();
         }
 

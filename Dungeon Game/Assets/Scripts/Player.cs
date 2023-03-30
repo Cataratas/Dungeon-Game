@@ -1,4 +1,4 @@
-using DungeonGen;
+using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
 
 public class Player : MonoBehaviour {

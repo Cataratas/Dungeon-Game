@@ -5,7 +5,7 @@ using UnityEditor;
 namespace Editor {
     [CustomEditor(typeof(AbstractDungeonGenerator), true)]
     public class RandomDungeonGeneratorEditor : UnityEditor.Editor {
-        AbstractDungeonGenerator generator;
+        private AbstractDungeonGenerator generator;
 
         private void Awake() {
             generator = (AbstractDungeonGenerator) target;

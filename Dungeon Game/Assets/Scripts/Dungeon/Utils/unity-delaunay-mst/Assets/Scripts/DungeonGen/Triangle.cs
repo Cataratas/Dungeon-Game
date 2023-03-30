@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DungeonGen
+namespace Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen
 {
     public class Triangle
     {

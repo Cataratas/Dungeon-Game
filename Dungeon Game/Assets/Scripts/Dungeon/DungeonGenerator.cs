@@ -1,181 +1,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Dungeon.Data;
-using DungeonGen;
+using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
+using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 namespace Dungeon {
-    public class DungeonGenerator : AbstractDungeonGenerator {
+    public partial class DungeonGenerator : AbstractDungeonGenerator {
+        [Header("Parameters")]
         [SerializeField] protected Vector2Int size = new Vector2Int(100, 100);
         [SerializeField] protected int roomQuantity = 25;
-        [SerializeField] protected List<RoomParameters> roomParameters;
+        [SerializeField] protected List<RoomParameters> roomTypes;
         [SerializeField] protected int seed;
         //[SerializeField] protected string seed;
+        
         private const int HallwayWidth = 3;
         private const double PercentageOfEdges = .08;
+        private Dungeon dungeon;
+        private List<Edge> graph;
+        private int[,] heatmap;
 
         protected override void runProceduralGeneration() {
-            var dungeon = new Dungeon();
-
-            var randomSeed = UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue);
-            //UnityEngine.Random.InitState(seed.Length > 0 ? seed.GetHashCode() : UnityEngine.Random.Range(Int32.MinValue, Int32.MaxValue));
-            UnityEngine.Random.InitState(seed != 0 ? seed : randomSeed);
-            if (seed == 0)
-                Debug.Log(randomSeed);
-
-            generateRooms(dungeon);
-            generateHallways(dungeon);
+            dungeon = new Dungeon();
+            heatmap = new int[size.x + 20, size.y + 20];
+            graph = new List<Edge>();
+            
+            int randomSeed = Random.Range(int.MinValue, int.MaxValue);
+            Random.InitState(seed != 0 ? seed : randomSeed);
+            Debug.Log(randomSeed);
+            
+            generateRooms();
+            generateHallways();
 
             var tiles = dungeon.getFloors();
-            tilemapGenerator.paintFloorTiles(tiles);
-            WallGenerator.generateWalls(tiles, tilemapGenerator);
+            Walls.generate(tiles, tilemap);
+            generateSpikes(tiles);
             
-            generateSpikes(dungeon, tiles);
-            spawnPlayer(dungeon);
+            var spawnPos = getSpawnPos();
+            generateHeatmap(new Vector2Int(spawnPos.x, spawnPos.y), tiles);
+            
+            tilemap.paintFloorTiles(tiles);
+            tilemap.paintHeatmap(heatmap);
         }
 
-        protected static void spawnPlayer(Dungeon dungeon) {
-            foreach (var room in dungeon.rooms.Where(room => room.parameters.playerCanSpawn)) {
-                FindAnyObjectByType<Player>().setPos(room.center);
-                break;
-            }
-        }
-
-        protected void generateSpikes(Dungeon dungeon, HashSet<Vector2Int> floor) {
-            foreach (var tile in dungeon.hallways) {
-                if (!(UnityEngine.Random.value <= .02f) || dungeon.collideWithRooms(tile))
-                    continue;
-                foreach (var dir in new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right }) {
-                    if (!floor.Contains(tile + dir * 2) && !floor.Contains(tile + dir * -2)) {
-                        for (int i = -1; i < HallwayWidth - 1; i++) {
-                            tilemapGenerator.paintSingleTile(tilemapGenerator.floorTilemap, tilemapGenerator.floorTiles[4], tile + dir * (-1 * i));
-                        }
-                    } else {
-                        if (floor.Contains(tile + dir) || floor.Contains(tile + dir * (-1 * HallwayWidth)))
-                            continue;
-                        for (var i = 0; i < HallwayWidth; i++) {
-                            tilemapGenerator.paintSingleTile(tilemapGenerator.floorTilemap, tilemapGenerator.floorTiles[4], tile + dir * (-1 * i));
-                        }
-                    }
-                }
-            }
-        }
-        
-        protected void generateHallways(Dungeon dungeon) {
-            var triangles = BowyerWatson.Triangulate(dungeon.centers);
-            var graph = new HashSet<Edge>();
-            foreach (var triangle in triangles) {
-                graph.UnionWith(triangle.edges);
-            }
-            var tree = Kruskal.MinimumSpanningTree(graph);
-
-            var graphList = graph.Except(tree).ToList();
-            var numElements = (int) Math.Round(graphList.Count * PercentageOfEdges);
-            var selectedList = new List<Edge>();
-
-            while (selectedList.Count < numElements)
-                selectedList.Add(graphList[UnityEngine.Random.Range(0, graphList.Count)]);
-            tree.AddRange(selectedList);
-
-            foreach (var edge in tree) {
-                var p1 = new Vector3(edge.a.x, edge.a.y);
-                var p2 = new Vector3(edge.b.x, edge.b.y);
-                dungeon.AddHallway(generateHallway(new Vector2Int((int) p1.x, (int) p1.y), new Vector2Int((int) p2.x, (int) p2.y)));
-            }
-        }
-
-        private static IEnumerable<Vector2Int> generateHallway(Vector2Int start, Vector2Int end) {
-            var hallway = new HashSet<Vector2Int>();
-            int dx = end.x - start.x;
-            int dy = end.y - start.y;
-            int xStep = dx > 0 ? 1 : -1;
-            int yStep = dy > 0 ? 1 : -1;
-            int x = start.x;
-            int y = start.y;
-            if (Mathf.Abs(dx) > Mathf.Abs(dy)) {
-                while (x != end.x) {
-                    for (var i = 0; i < HallwayWidth; i++) {
-                        hallway.Add(new Vector2Int(x, y + i * yStep));
-                    }
-                    x += xStep;
-                }
-                while (y != end.y) {
-                    for (var i = 0; i < HallwayWidth; i++) {
-                        hallway.Add(new Vector2Int(x + i * xStep, y));
-                    }
-                    y += yStep;
-                }
-            } else {
-                while (y != end.y) {
-                    for (var i = 0; i < HallwayWidth; i++) {
-                        hallway.Add(new Vector2Int(x + i * xStep, y));
-                    }
-                    y += yStep;
-                }
-                while (x != end.x) {
-                    for (var i = 0; i < HallwayWidth; i++) {
-                        hallway.Add(new Vector2Int(x, y + i * yStep));
-                    }
-                    x += xStep;
-                }
-            }
-            return hallway;
-        }
-
-        private void generateRooms(Dungeon dungeon) {
-            int roomCount = 0, tries = 0;
-            while (roomCount != roomQuantity) {
-                if (tries > 99999)
-                    break;
-
-                var p = roomParameters[UnityEngine.Random.Range(0, roomParameters.Count)];
-                var roomSize = new Vector2Int(UnityEngine.Random.Range(p.minRoomWidth, p.maxRoomWidth), UnityEngine.Random.Range(p.minRoomHeight, p.maxRoomHeight));
-                var pos = new Vector2Int(UnityEngine.Random.Range(startPos.x, startPos.x + size.x), UnityEngine.Random.Range(startPos.y, startPos.y + size.y));
-                var room = generateRoom(dungeon, p, pos, roomSize);
-
-                if (room.floors.Count > 0) {
-                    dungeon.AddRoom(room);
-                    roomCount++;
-                } else
-                    tries++;
-            }
-        }
-
-        private static Room generateRoom(Dungeon dungeon, RoomParameters p, Vector2Int roomPos, Vector2Int roomSize) {
-            var room = new Room();
-            var floor = new HashSet<Vector2Int>();
-
-            var pos = roomPos + new Vector2Int((-roomSize.x / 2) - p.offset, (roomSize.y / 2) + p.offset);
-
-            for (var i = 0; i < roomSize.x + p.offset * 2; i++) {
-                pos += Vector2Int.right;
-                floor.Add(pos);
-                var vPos = pos;
-                for (var j = 0; j < roomSize.y + p.offset * 2; j++) {
-                    vPos += Vector2Int.down;
-                    floor.Add(vPos);
-                }
-            }
-            if (dungeon.collidesWithRooms(floor))
-                return new Room();
-
-            pos = roomPos + new Vector2Int((-roomSize.x / 2), (roomSize.y / 2));
-            floor = new HashSet<Vector2Int>();
-            for (var i = 0; i < roomSize.x; i++) {
-                pos += Vector2Int.right;
-                floor.Add(pos);
-                var vPos = pos;
-                for (var j = 0; j < roomSize.y; j++) {
-                    vPos += Vector2Int.down;
-                    floor.Add(vPos);
-                }
-            }
-            room.center = new Point(roomPos.x + 1, roomPos.y);
-            room.floors = floor;
-            room.parameters = p;
-            return room;
+        private Point getSpawnPos() {
+            return dungeon.rooms.Where(room => room.parameters.playerCanSpawn).Select(room => room.center).FirstOrDefault();
         }
     }
 }

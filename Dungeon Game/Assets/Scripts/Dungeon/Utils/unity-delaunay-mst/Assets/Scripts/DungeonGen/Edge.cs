@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DungeonGen
+namespace Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen
 {
     public class Edge
     {
