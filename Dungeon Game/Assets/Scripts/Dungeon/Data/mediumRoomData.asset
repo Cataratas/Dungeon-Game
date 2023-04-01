@@ -21,4 +21,4 @@ MonoBehaviour:
   playerCanExit: 1
   treasureRoomChance: 0
   minChestAmount: 0
-  maxChestAmount: 3
+  maxChestAmount: 2

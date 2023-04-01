@@ -26,9 +26,7 @@ namespace Dungeon {
 
         protected override void runProceduralGeneration() {
             dungeon = new Dungeon();
-            heatmap = new int[size.x + 20, size.y + 20];
-            graph = new List<Edge>();
-            
+
             int randomSeed = Random.Range(int.MinValue, int.MaxValue);
             Random.InitState(seed != 0 ? seed : randomSeed);
             Debug.Log(randomSeed);
@@ -52,7 +50,7 @@ namespace Dungeon {
                 tilemap.paintRoomObjects(room.chests);
             }
             
-            tilemap.paintFloorTiles(tiles);
+            tilemap.paintFloorTiles(tiles, dungeon.spikes);
             tilemap.paintHeatmap(heatmap);
         }
 

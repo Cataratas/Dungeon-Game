@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -9,10 +10,14 @@ namespace Dungeon {
         [SerializeField] public Tilemap floorTilemap, wallTilemap, heatmapTilemap, objectTilemap;
         [SerializeField] public List<TileBase> floorTiles, wallTiles, objectTiles;
 
-        public void paintFloorTiles(IEnumerable<Vector2Int> tiles) {
+        public void paintFloorTiles(IEnumerable<Vector2Int> tiles, HashSet<Vector2Int> spikes) {
             foreach (var tile in tiles) {
-                int tileBase = Random.value <= 0.03f ? Random.Range(1, 3) : 0;
-                paintSingleTile(floorTilemap, floorTiles[tileBase], tile);
+                if (!spikes.Contains(tile)) {
+                    int tileBase = Random.value <= 0.03f ? Random.Range(1, 3) : 0;
+                    paintSingleTile(floorTilemap, floorTiles[tileBase], tile);
+                } else {
+                    paintSingleTile(floorTilemap, floorTiles[4], tile);
+                }
             }
         }
         public void paintSingleTile(Tilemap tilemap, TileBase tileBase, Vector2Int position) {

@@ -20,5 +20,5 @@ MonoBehaviour:
   playerCanSpawn: 0
   playerCanExit: 0
   treasureRoomChance: 0
-  minChestAmount: 2
-  maxChestAmount: 6
+  minChestAmount: 1
+  maxChestAmount: 3

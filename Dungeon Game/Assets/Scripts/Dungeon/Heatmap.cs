@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Dungeon {
     public partial class DungeonGenerator {
         private void generateHeatmap(Vector2Int start, ICollection<Vector2Int> floors) {
+            heatmap = new int[size.x + 20, size.y + 20];
             var queue = new PriorityQueue<Vector2Int>();
             
             for (var x = 0; x < size.x + 20; x++) {

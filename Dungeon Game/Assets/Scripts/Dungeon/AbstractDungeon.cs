@@ -12,6 +12,7 @@ namespace Dungeon {
             public readonly List<Room> rooms = new List<Room>();
             public readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
             public readonly HashSet<Point> centers = new HashSet<Point>();
+            public readonly HashSet<Vector2Int> spikes = new HashSet<Vector2Int>();
             public Vector2Int exit = Vector2Int.zero;
 
             public void AddRoom(Room room) {

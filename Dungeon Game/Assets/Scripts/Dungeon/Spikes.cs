@@ -10,13 +10,13 @@ namespace Dungeon {
                 foreach (var dir in new List<Vector2Int> { Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right }) {
                     if (!floor.Contains(tile + dir * 2) && !floor.Contains(tile + dir * -2)) {
                         for (int i = -1; i < HallwayWidth - 1; i++) {
-                            tilemap.paintSingleTile(tilemap.floorTilemap, tilemap.floorTiles[4], tile + dir * (-1 * i));
+                            dungeon.spikes.Add(tile + dir * (-1 * i));
                         }
                     } else {
                         if (floor.Contains(tile + dir) || floor.Contains(tile + dir * (-1 * HallwayWidth)))
                             continue;
                         for (var i = 0; i < HallwayWidth; i++)
-                            tilemap.paintSingleTile(tilemap.floorTilemap, tilemap.floorTiles[4], tile + dir * (-1 * i));
+                            dungeon.spikes.Add(tile + dir * (-1 * i));
                     }
                 }
             }
