@@ -12,6 +12,7 @@ namespace Dungeon {
             public readonly List<Room> rooms = new List<Room>();
             public readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
             public readonly HashSet<Point> centers = new HashSet<Point>();
+            public Vector2Int exit = Vector2Int.zero;
 
             public void AddRoom(Room room) {
                 rooms.Add(room);
@@ -42,8 +43,10 @@ namespace Dungeon {
         
         protected class Room {
             public HashSet<Vector2Int> floors = new HashSet<Vector2Int>();
+            public HashSet<Chest> chests = new HashSet<Chest>();
             public Point center;
             public RoomParameters parameters;
+            public bool exit;
         }
 
         public void generateDungeon() {

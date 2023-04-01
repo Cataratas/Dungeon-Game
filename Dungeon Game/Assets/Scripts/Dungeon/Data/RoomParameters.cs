@@ -13,5 +13,12 @@ namespace Dungeon.Data {
 
         [Header("Parameters")]
         public bool playerCanSpawn;
+        public bool playerCanExit;
+        [Range(0, 1)]
+        public double treasureRoomChance;
+
+        [Header("Chest")]
+        public int minChestAmount;
+        public int maxChestAmount;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Dungeon.Utils;
 using UnityEngine;
 
@@ -42,6 +43,23 @@ namespace Dungeon {
             }
     
             return neighbors;
+        }
+
+        private Tuple<int, int> getMinMaxHeatmap() {
+            int minCost = int.MaxValue;
+            int maxCost = int.MinValue;
+            for (int x = 0; x < heatmap.GetLength(0); x++) {
+                for (int y = 0; y < heatmap.GetLength(1); y++) {
+                    int cost = heatmap[x, y];
+                    if (cost < minCost) {
+                        minCost = cost; 
+                    }
+                    if (cost > maxCost) {
+                        maxCost = cost;
+                    }
+                }
+            }
+            return Tuple.Create(minCost, maxCost);
         }
     }
 }

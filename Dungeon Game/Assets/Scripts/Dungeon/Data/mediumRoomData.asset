@@ -18,3 +18,7 @@ MonoBehaviour:
   maxRoomHeight: 10
   offset: 4
   playerCanSpawn: 1
+  playerCanExit: 1
+  treasureRoomChance: 0
+  minChestAmount: 0
+  maxChestAmount: 3

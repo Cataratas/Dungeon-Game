@@ -17,9 +17,8 @@ MonoBehaviour:
   maxRoomWidth: 16
   maxRoomHeight: 16
   offset: 4
-  canPlayerSpawn: 0
-  canHavePuzzle: 0
-  canBeTreasureRoom: 0
-  canHaveBoss: 1
-  minEnemies: 6
-  maxEnemies: 12
+  playerCanSpawn: 0
+  playerCanExit: 0
+  treasureRoomChance: 0
+  minChestAmount: 2
+  maxChestAmount: 6

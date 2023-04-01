@@ -191,6 +191,8 @@ namespace Dungeon {
                         walls.Add(new Wall(leftDown, 32));
                     else if (floor.Contains(leftDown + Vector2Int.down + Vector2Int.left))
                         walls.Add(new Wall(leftDown, 36)); // 529
+                    else if (floor.Contains(leftDown + Vector2Int.down + Vector2Int.left + Vector2Int.down))
+                        walls.Add(new Wall(leftDown, 49)); // 535
                     else
                         walls.Add(new Wall(leftDown, 16));
                 }
