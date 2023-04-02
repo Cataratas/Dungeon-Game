@@ -1,14 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
 namespace Dungeon {
     public class TilemapVisualizer : MonoBehaviour {
-        [SerializeField] public Tilemap floorTilemap, wallTilemap, heatmapTilemap, objectTilemap;
-        [SerializeField] public List<TileBase> floorTiles, wallTiles, objectTiles;
+        [SerializeField] public Tilemap floorTilemap, wallTilemap, heatmapTilemap;
+        [SerializeField] public List<TileBase> floorTiles, wallTiles;
 
         public void paintFloorTiles(IEnumerable<Vector2Int> tiles, HashSet<Vector2Int> spikes) {
             foreach (var tile in tiles) {
@@ -27,12 +25,6 @@ namespace Dungeon {
 
         public void paintSingleWall(Vector2Int pos, int type) {
             paintSingleTile(wallTilemap, wallTiles[type], pos);
-        }
-
-        public void paintRoomObjects(HashSet<Chest> chests) {
-            foreach (var chest in chests) {
-                paintSingleTile(objectTilemap, objectTiles[chest.tile], chest.pos);
-            }
         }
 
         public void paintHeatmap(int[,] heatmap) {
@@ -68,7 +60,6 @@ namespace Dungeon {
         }
 
         public void clear() {
-            objectTilemap.ClearAllTiles();
             wallTilemap.ClearAllTiles();
             floorTilemap.ClearAllTiles();
             heatmapTilemap.ClearAllTiles();

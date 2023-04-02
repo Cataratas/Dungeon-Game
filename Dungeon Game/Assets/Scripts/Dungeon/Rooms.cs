@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Dungeon.Data;
+using Data;
 using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ namespace Dungeon {
             }
         }
 
-        private Room generateRoom(RoomParameters p, Vector2Int roomPos, Vector2Int roomSize) {
+        private Room generateRoom(RoomData p, Vector2Int roomPos, Vector2Int roomSize) {
             var room = new Room();
             var floor = new HashSet<Vector2Int>();
 
@@ -55,7 +55,7 @@ namespace Dungeon {
             }
             room.center = new Point(roomPos.x + 1, roomPos.y);
             room.floors = floor;
-            room.parameters = p;
+            room.data = p;
             return room;
         }
     }

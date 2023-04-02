@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Dungeon.Data;
+using Data;
 using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
 
@@ -43,14 +43,18 @@ namespace Dungeon {
         }
         
         protected class Room {
-            public HashSet<Vector2Int> floors = new HashSet<Vector2Int>();
-            public HashSet<Chest> chests = new HashSet<Chest>();
+            public HashSet<Vector2Int> floors;
             public Point center;
-            public RoomParameters parameters;
+            public RoomData data;
             public bool exit;
         }
 
         public void generateDungeon() {
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            var objects = GameObject.FindGameObjectsWithTag("Object");
+            foreach (var enemy in enemies) DestroyImmediate(enemy);
+            foreach (var obj in objects) DestroyImmediate(obj);
+            
             tilemap.clear();
             runProceduralGeneration();
         }

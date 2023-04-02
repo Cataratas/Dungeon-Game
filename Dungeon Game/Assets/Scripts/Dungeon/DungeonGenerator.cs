@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Diagnostics;
 using System.Linq;
-using Dungeon.Data;
+using Data;
 using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
-using UnityEngine.Serialization;
 using Debug = UnityEngine.Debug;
 using Random = UnityEngine.Random;
 
@@ -14,7 +11,7 @@ namespace Dungeon {
         [Header("Parameters")]
         [SerializeField] protected Vector2Int size = new Vector2Int(100, 100);
         [SerializeField] protected int roomQuantity = 25;
-        [SerializeField] protected List<RoomParameters> roomTypes;
+        [SerializeField] protected List<RoomData> roomTypes;
         [SerializeField] protected int seed;
         //[SerializeField] protected string seed;
         
@@ -38,16 +35,15 @@ namespace Dungeon {
             Walls.generate(tiles, tilemap);
             generateSpikes(tiles);
             
-            var spawnPos = getSpawnPos();
-            generateHeatmap(new Vector2Int(spawnPos.x, spawnPos.y), tiles);
+            var spawnPoint = getSpawnPos();
+            generateHeatmap(new Vector2Int(spawnPoint.x, spawnPoint.y), tiles);
             setExit();
 
             foreach (var room in dungeon.rooms) {
-                if (!room.exit && Random.value < room.parameters.treasureRoomChance)
+                if (!room.exit && Random.value < room.data.treasureRoomChance)
                     populateTreasureRoom(room);
                 else
-                    populateRoom(room);
-                tilemap.paintRoomObjects(room.chests);
+                    populateRoom(room, spawnPoint);
             }
             
             tilemap.paintFloorTiles(tiles, dungeon.spikes);
@@ -61,7 +57,7 @@ namespace Dungeon {
                 var heatmapCost = getMinMaxHeatmap();
                 foreach (var room in dungeon.rooms) {
                     float cost = Mathf.Clamp01((float) heatmap[room.center.x, room.center.y] / heatmapCost.Item2);
-                    if (dungeon.exit != Vector2Int.zero || !room.parameters.playerCanExit || !(cost >= range))
+                    if (dungeon.exit != Vector2Int.zero || !room.data.playerCanExit || !(cost >= range))
                         continue;
                     dungeon.exit = new Vector2Int(room.center.x, room.center.y);
                     room.exit = true;
@@ -76,30 +72,40 @@ namespace Dungeon {
             
         }
 
-        private void populateRoom(Room room) {
+        private void populateRoom(Room room, Point spawnPoint) {
             var chestCount = 0;
 
-            int chestAmount = Random.Range(room.parameters.minChestAmount, room.parameters.maxChestAmount);
+            int chestAmount = Random.Range(room.data.minChestAmount, room.data.maxChestAmount);
 
             while (chestCount != chestAmount) {
                 var pos = room.floors.ElementAt(Random.Range(0, room.floors.Count));
-                if (dungeon.hallways.Contains(pos) || hasAllNeighbors(room, pos) || !room.floors.Contains(pos + Vector2Int.down) || hasChestAt(room, pos + Vector2Int.up) || hasChestAt(room, pos + Vector2Int.down))
+                if (dungeon.hallways.Contains(pos) || hasAllNeighbors(room, pos) || !room.floors.Contains(pos + Vector2Int.down))
                     continue;
-                room.chests.Add(new Chest(pos));
+                Instantiate(room.data.chest, new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
                 chestCount++;
+            }
+            if (room.center.Equals(spawnPoint))
+                return;
+            
+            int enemyCount = Random.Range(room.data.minEnemyCount, room.data.maxEnemyCount);
+            var count = 0;
+
+            while (count != enemyCount) {
+                var pos = room.floors.ElementAt(Random.Range(0, room.floors.Count));
+                if (!hasAllNeighbors(room, pos))
+                    continue;
+                
+                Instantiate(room.data.enemies[0], new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
+                count++;
             }
         }
 
-        private static bool hasChestAt(Room room, Vector2Int pos) {
-            return room.chests.Any(chest => chest.pos == pos);
-        }
-        
         private static bool hasAllNeighbors(Room room, Vector2Int pos) {
             return room.floors.Contains(pos + Vector2Int.up) && room.floors.Contains(pos + Vector2Int.down) && room.floors.Contains(pos + Vector2Int.right) && room.floors.Contains(pos + Vector2Int.left);
         }
 
         private Point getSpawnPos() {
-            return dungeon.rooms.Where(room => room.parameters.playerCanSpawn).Select(room => room.center).FirstOrDefault();
+            return dungeon.rooms.Where(room => room.data.playerCanSpawn).Select(room => room.center).First();
         }
     }
 }
