@@ -26,6 +26,8 @@ namespace Data {
         [Header("Enemies")]
         public int minEnemyCount;
         public int maxEnemyCount;
-        public List<GameObject> enemies;
+        public List<GameObject> undead;
+        public List<GameObject> orcs;
+        public List<GameObject> demons;
     }
 }

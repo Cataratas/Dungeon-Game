@@ -20,5 +20,25 @@ MonoBehaviour:
   playerCanSpawn: 0
   playerCanExit: 0
   treasureRoomChance: 0
+  chest: {fileID: 2066711761081593548, guid: 8e18bcab7a760d34eb49db7c12458d79, type: 3}
   minChestAmount: 1
   maxChestAmount: 3
+  minEnemyCount: 4
+  maxEnemyCount: 10
+  undead:
+  - {fileID: 609417008387354461, guid: b11f5350cc213e94d8fc40accc5085aa, type: 3}
+  - {fileID: 609417008387354461, guid: 19e66f26af722b04fb4801ac8b139630, type: 3}
+  - {fileID: 75111617157349137, guid: f204e8ad2d8fca748b9669f33d267834, type: 3}
+  - {fileID: 6982382937263395818, guid: 48fd825b8d6318c4e9967a73d3d23a27, type: 3}
+  - {fileID: 4041086771474588333, guid: 336c90b88e2da644ba58e343f71d989d, type: 3}
+  - {fileID: 1305231041353491038, guid: b00879c5bcf8afc468fd61d5094b6ceb, type: 3}
+  orcs:
+  - {fileID: 2424567658980067768, guid: 360bd3ad7a107264b85047f00011d465, type: 3}
+  - {fileID: 8943084312226981375, guid: c69796ad4b21d4048aedf146c29acc38, type: 3}
+  - {fileID: 8532476061306919016, guid: 69c589b438376454ea2062c8ee865226, type: 3}
+  - {fileID: 4140514077126932191, guid: 776fe454f4d7031469eb3c44112f2e1a, type: 3}
+  demons:
+  - {fileID: 8532476061306919016, guid: 71920da48f9a3ed4daad8ecf90fbac6f, type: 3}
+  - {fileID: 8249102494507042488, guid: f1d27cc5727568547ac857326c71a108, type: 3}
+  - {fileID: 1557919141062442444, guid: bd9bab5d33110864390e2be56f12eaa8, type: 3}
+  - {fileID: 8532476061306919016, guid: fa806a6f30f173041b15e7f7d2dedaad, type: 3}

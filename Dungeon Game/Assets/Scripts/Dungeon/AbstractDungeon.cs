@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Dungeon {
     public abstract class AbstractDungeonGenerator : MonoBehaviour {
         [SerializeField] protected TilemapVisualizer tilemap;
+        [SerializeField] protected List<GameObject> players;
         protected static Vector2Int startPos = new Vector2Int(10, 10);
         protected class Dungeon {
             public readonly List<Room> rooms = new List<Room>();
@@ -43,15 +44,18 @@ namespace Dungeon {
         }
         
         protected class Room {
-            public HashSet<Vector2Int> floors;
+            public HashSet<Vector2Int> floors = new HashSet<Vector2Int>();
             public Point center;
             public RoomData data;
             public bool exit;
         }
 
+        // TODO: Find another way to reference and destroy gameObjects
         public void generateDungeon() {
+            var players = GameObject.FindGameObjectsWithTag("Player");
             var enemies = GameObject.FindGameObjectsWithTag("Enemy");
             var objects = GameObject.FindGameObjectsWithTag("Object");
+            foreach (var player in players) DestroyImmediate(player);
             foreach (var enemy in enemies) DestroyImmediate(enemy);
             foreach (var obj in objects) DestroyImmediate(obj);
             

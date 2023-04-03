@@ -36,6 +36,7 @@ namespace Dungeon {
             generateSpikes(tiles);
             
             var spawnPoint = getSpawnPos();
+            Instantiate(players[0], new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
             generateHeatmap(new Vector2Int(spawnPoint.x, spawnPoint.y), tiles);
             setExit();
 
@@ -79,7 +80,7 @@ namespace Dungeon {
 
             while (chestCount != chestAmount) {
                 var pos = room.floors.ElementAt(Random.Range(0, room.floors.Count));
-                if (dungeon.hallways.Contains(pos) || hasAllNeighbors(room, pos) || !room.floors.Contains(pos + Vector2Int.down))
+                if (dungeon.hallways.Contains(pos) || hasAllNeighbors(pos) || !room.floors.Contains(pos + Vector2Int.down))
                     continue;
                 Instantiate(room.data.chest, new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
                 chestCount++;
@@ -89,18 +90,31 @@ namespace Dungeon {
             
             int enemyCount = Random.Range(room.data.minEnemyCount, room.data.maxEnemyCount);
             var count = 0;
+            
+            var enemyList = Random.Range(0, 3) switch {
+                0 => room.data.undead,
+                1 => room.data.orcs,
+                2 => room.data.demons,
+                _ => room.data.undead
+            };
 
             while (count != enemyCount) {
+                // TODO: Make sure enemies don't have the same positions
                 var pos = room.floors.ElementAt(Random.Range(0, room.floors.Count));
                 if (!hasAllNeighbors(room, pos))
                     continue;
                 
-                Instantiate(room.data.enemies[0], new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
+                Instantiate(enemyList[Random.Range(0, enemyList.Count)], new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
                 count++;
             }
         }
 
-        private static bool hasAllNeighbors(Room room, Vector2Int pos) {
+        private bool hasAllNeighbors(Vector2Int pos) {
+            var floors = dungeon.getFloors();
+            return floors.Contains(pos + Vector2Int.up) && floors.Contains(pos + Vector2Int.down) && floors.Contains(pos + Vector2Int.right) && floors.Contains(pos + Vector2Int.left);
+        }
+
+        private bool hasAllNeighbors(Room room, Vector2Int pos) {
             return room.floors.Contains(pos + Vector2Int.up) && room.floors.Contains(pos + Vector2Int.down) && room.floors.Contains(pos + Vector2Int.right) && room.floors.Contains(pos + Vector2Int.left);
         }
 

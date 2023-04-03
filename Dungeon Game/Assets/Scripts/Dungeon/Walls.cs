@@ -166,7 +166,9 @@ namespace Dungeon {
                     }
                 }
                 if (!floor.Contains(down) && !floor.Contains(right) && !floor.Contains(rightDown + Vector2Int.down)) {
-                    if (floor.Contains(rightDown + Vector2Int.right))
+                    if (floor.Contains(rightDown + Vector2Int.right) && floor.Contains(rightDown + Vector2Int.down + Vector2Int.down))
+                        walls.Add(new Wall(rightDown, 50)); // 533
+                    else if (floor.Contains(rightDown + Vector2Int.right))
                         walls.Add(new Wall(rightDown, 33));
                     else if (floor.Contains(rightDown + Vector2Int.down + Vector2Int.down) && !floor.Contains(down + Vector2Int.down))
                         walls.Add(new Wall(rightDown, 30));
