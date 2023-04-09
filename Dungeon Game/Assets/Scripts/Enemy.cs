@@ -1,21 +1,13 @@
 ﻿using Data;
-using Interfaces;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable {
-    [SerializeField]
-    private EnemyData data;
-
-    private int heath, damage;
-    private float speed;
+public class Enemy : Character {
+    [SerializeField] private EnemyData data;
+    [SerializeField] private int damage = 10;
 
     public void Awake() {
-        heath = data.health;
+        health = data.health;
         damage = data.damage;
         speed = data.speed;
-    }
-    
-    public void Damage() {
-        
     }
 }

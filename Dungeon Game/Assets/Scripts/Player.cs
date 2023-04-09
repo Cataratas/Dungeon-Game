@@ -1,8 +1,7 @@
 using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-    public float moveSpeed = 200f;
+public class Player : Character {
     private Vector2 move;
     private Rigidbody2D rb;
     
@@ -11,7 +10,7 @@ public class Player : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(move.x * moveSpeed * Time.deltaTime, move.y * moveSpeed * Time.deltaTime);
+        rb.velocity = new Vector2(move.x * speed * Time.deltaTime, move.y * speed * Time.deltaTime);
     }
 
     private void Update() {
