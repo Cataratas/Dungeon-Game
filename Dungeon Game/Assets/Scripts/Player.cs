@@ -4,21 +4,21 @@ public class Player : Character {
     private Vector2 move;
     private Rigidbody2D rigidBody;
     private SpriteRenderer spriteRenderer;
-    public HealthBar healthBar;
-    
+    private HealthBar healthBar;
+
     private void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        healthBar = GameObject.FindWithTag("Health Bar").GetComponentInChildren<HealthBar>();
         healthBar.setHealth(maxHealth, health);
     }
 
     private void FixedUpdate() {
         rigidBody.velocity = new Vector2(move.x * speed * Time.deltaTime, move.y * speed * Time.deltaTime);
         if (move.x > 0) {
-            spriteRenderer.flipX = false; // No flipping
-        }
-        else if (move.x < 0) {
-            spriteRenderer.flipX = true; // Flip horizontally
+            spriteRenderer.flipX = false;
+        } else if (move.x < 0) {
+            spriteRenderer.flipX = true;
         }
     }
 
