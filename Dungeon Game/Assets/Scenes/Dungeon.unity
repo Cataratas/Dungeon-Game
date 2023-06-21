@@ -2245,7 +2245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -65.99988, y: -1153.2}
+  m_AnchoredPosition: {x: -66, y: -1153.2}
   m_SizeDelta: {x: 4.2, y: 0.25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &730653439
@@ -15617,7 +15617,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.67
+  m_FillAmount: 0.808
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -32727,7 +32727,7 @@ Tilemap:
       - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
       - {fileID: 690512343, guid: 485f332aa317ba64bb5f099279257546, type: 3}
       - {fileID: -1549154216, guid: 485f332aa317ba64bb5f099279257546, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 69, y: 48, z: 0}
@@ -32799,7 +32799,7 @@ Tilemap:
       - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
       - {fileID: 690512343, guid: 485f332aa317ba64bb5f099279257546, type: 3}
       - {fileID: -1549154216, guid: 485f332aa317ba64bb5f099279257546, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 68, y: 51, z: 0}
@@ -32835,7 +32835,7 @@ Tilemap:
       - {fileID: 477125867, guid: 485f332aa317ba64bb5f099279257546, type: 3}
       - {fileID: 690512343, guid: 485f332aa317ba64bb5f099279257546, type: 3}
       - {fileID: -1549154216, guid: 485f332aa317ba64bb5f099279257546, type: 3}
-      m_AnimationSpeed: 10
+      m_AnimationSpeed: 10.000001
       m_AnimationTimeOffset: 0
       m_IsLooping: 1
   - first: {x: 69, y: 51, z: 0}

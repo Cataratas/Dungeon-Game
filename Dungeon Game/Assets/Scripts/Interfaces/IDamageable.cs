@@ -1,5 +1,5 @@
 ﻿namespace Interfaces {
     public interface IDamageable {
-        void Damage();
+        void Damage(float damage);
     }
 }

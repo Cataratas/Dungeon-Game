@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Enemy : Character {
     [SerializeField] private EnemyData data;
-    [SerializeField] private int damage = 10;
+    protected int damage;
 
-    public void Awake() {
+    public void Start() {
         health = data.health;
         damage = data.damage;
         speed = data.speed;

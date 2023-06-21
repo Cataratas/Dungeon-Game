@@ -1,23 +1,37 @@
-using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
 using UnityEngine;
 
 public class Player : Character {
     private Vector2 move;
-    private Rigidbody2D rb;
+    private Rigidbody2D rigidBody;
+    private SpriteRenderer spriteRenderer;
+    public HealthBar healthBar;
     
     private void Start() {
-        rb = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        healthBar.setHealth(maxHealth, health);
     }
 
     private void FixedUpdate() {
-        rb.velocity = new Vector2(move.x * speed * Time.deltaTime, move.y * speed * Time.deltaTime);
+        rigidBody.velocity = new Vector2(move.x * speed * Time.deltaTime, move.y * speed * Time.deltaTime);
+        if (move.x > 0) {
+            spriteRenderer.flipX = false; // No flipping
+        }
+        else if (move.x < 0) {
+            spriteRenderer.flipX = true; // Flip horizontally
+        }
     }
 
     private void Update() {
         move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Damage(1f);
+        }
     }
 
-    public void setPos(Point pos) {
-        transform.position = new Vector3(pos.x, pos.y);
+    private new void Damage(float damage) {
+        health -= damage;
+        healthBar.setHealth(maxHealth, health);
     }
 }

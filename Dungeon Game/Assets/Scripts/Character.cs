@@ -1,12 +1,17 @@
-﻿using Interfaces;
+﻿using System;
+using Interfaces;
 using UnityEngine;
 
 public class Character : MonoBehaviour, IDamageable {
-    [SerializeField] protected int maxHealth;
+    [SerializeField] protected float maxHealth;
     [SerializeField] protected float speed = 275f;
-    protected int health;
+    protected float health;
 
-    public void Damage() {
-        throw new System.NotImplementedException();
+    public void Awake() {
+        health = maxHealth;
+    }
+    
+    public void Damage(float damage) {
+        health -= damage;
     }
 }
