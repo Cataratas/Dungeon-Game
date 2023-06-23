@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9117266231922874193}
   - component: {fileID: 2261895506478593182}
   - component: {fileID: 874099845039630857}
+  - component: {fileID: -6415632247857500430}
   m_Layer: 0
   m_Name: IceZombie
   m_TagString: Enemy
@@ -97,4 +98,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb74cadce78489a999bb6eaeaaca43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  speed: 275
   data: {fileID: 11400000, guid: 4b688b0f746e18f4dad50240ae5535af, type: 2}
+--- !u!95 &-6415632247857500430
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75111617157349137}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 36553c86175337b4caf9ec5f09aebf19, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

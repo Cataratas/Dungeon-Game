@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7643461785727047052}
   - component: {fileID: 862390197744088643}
   - component: {fileID: 1780438663414048980}
+  - component: {fileID: 7634774804374731260}
   m_Layer: 0
   m_Name: Wogol
   m_TagString: Enemy
@@ -97,4 +98,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb74cadce78489a999bb6eaeaaca43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  speed: 275
   data: {fileID: 11400000, guid: f23fd1976f8e51a4bb1de7e5f30abbf7, type: 2}
+--- !u!95 &7634774804374731260
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557919141062442444}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0064e0404df49b64b8527893ecbe7ea3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

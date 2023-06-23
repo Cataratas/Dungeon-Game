@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7895034981724342814}
   - component: {fileID: 897369524367419857}
   - component: {fileID: 2249169802731239238}
+  - component: {fileID: 1317085210754982941}
   m_Layer: 0
   m_Name: Swampy
   m_TagString: Enemy
@@ -97,4 +98,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb74cadce78489a999bb6eaeaaca43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  speed: 275
   data: {fileID: 11400000, guid: e2fbeb7cba92c2d4981aafc5b5a01fe4, type: 2}
+--- !u!95 &1317085210754982941
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305231041353491038}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 35d1692162f9ba148aac62340b5233a2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

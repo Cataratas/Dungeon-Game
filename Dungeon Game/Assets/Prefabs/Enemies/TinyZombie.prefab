@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8644876369282729757}
   - component: {fileID: 1593168085783422162}
   - component: {fileID: 386923888277649989}
+  - component: {fileID: 7650909125028065457}
   m_Layer: 0
   m_Name: TinyZombie
   m_TagString: Enemy
@@ -97,4 +98,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb74cadce78489a999bb6eaeaaca43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  speed: 275
   data: {fileID: 11400000, guid: b25f7ffa628e7574c8ec532d04cf9a19, type: 2}
+--- !u!95 &7650909125028065457
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609417008387354461}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ce6161fa589631e4b95ae1c65ed39cc7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 712871724143570984}
   - component: {fileID: 7494119118005031911}
   - component: {fileID: 8881878529791069552}
+  - component: {fileID: -1861737533142758785}
   m_Layer: 0
   m_Name: Chort
   m_TagString: Enemy
@@ -97,4 +98,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb74cadce78489a999bb6eaeaaca43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 0
+  speed: 275
   data: {fileID: 11400000, guid: 83033740a4e6acd4fbea4f2d86589b8e, type: 2}
+--- !u!95 &-1861737533142758785
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8532476061306919016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9cef65163eedd8944a04d8f7e93f53e2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

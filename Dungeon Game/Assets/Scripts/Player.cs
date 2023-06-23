@@ -15,11 +15,7 @@ public class Player : Character {
 
     private void FixedUpdate() {
         rigidBody.velocity = new Vector2(move.x * speed * Time.deltaTime, move.y * speed * Time.deltaTime);
-        if (move.x > 0) {
-            spriteRenderer.flipX = false;
-        } else if (move.x < 0) {
-            spriteRenderer.flipX = true;
-        }
+        if (move.x is not 0) spriteRenderer.flipX = !(move.x > 0);
     }
 
     private void Update() {
