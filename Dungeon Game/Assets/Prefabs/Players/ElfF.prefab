@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8613842808954442119}
   - component: {fileID: 8613842808954442118}
   - component: {fileID: 8613842808954442112}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ElfF
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -145,8 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   speed: 275
-  healthBar: {fileID: 0}
-  referencedPrefab: {fileID: 322144476726631088, guid: 44a474f88ed874e49bd66eff5b7ba44f, type: 3}
 --- !u!61 &8613842808954442112
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +183,7 @@ GameObject:
   - component: {fileID: 8613842810637730244}
   - component: {fileID: 8613842810637730235}
   - component: {fileID: 8613842810637730234}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
