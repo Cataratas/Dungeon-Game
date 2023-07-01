@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d44cd0869b1492ab73be00201af14ad, type: 3}
   m_Name: Necromancer
   m_EditorClassIdentifier: 
-  health: 25
-  damage: 2
-  speed: 0
+  maxHealth: 45
+  damage: 5
+  speed: 2.5
+  range: 6
+  attackRange: 3
+  attackSpeed: 0.5

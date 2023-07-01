@@ -12,6 +12,7 @@ namespace Dungeon {
         [SerializeField] protected Vector2Int size = new Vector2Int(100, 100);
         [SerializeField] protected int roomQuantity = 25;
         [SerializeField] protected List<RoomData> roomTypes;
+        [SerializeField] public List<GameObject> objects;
         [SerializeField] protected int seed;
         //[SerializeField] protected string seed;
         
@@ -47,7 +48,7 @@ namespace Dungeon {
                     populateRoom(room, spawnPoint);
             }
             
-            tilemap.paintFloorTiles(tiles, dungeon.spikes);
+            tilemap.paintFloorTiles(tiles);
             tilemap.paintHeatmap(heatmap);
         }
 

@@ -8,14 +8,10 @@ namespace Dungeon {
         [SerializeField] public Tilemap floorTilemap, wallTilemap, heatmapTilemap;
         [SerializeField] public List<TileBase> floorTiles, wallTiles;
 
-        public void paintFloorTiles(IEnumerable<Vector2Int> tiles, HashSet<Vector2Int> spikes) {
+        public void paintFloorTiles(IEnumerable<Vector2Int> tiles) {
             foreach (var tile in tiles) {
-                if (!spikes.Contains(tile)) {
-                    int tileBase = Random.value <= 0.03f ? Random.Range(1, 3) : 0;
-                    paintSingleTile(floorTilemap, floorTiles[tileBase], tile);
-                } else {
-                    paintSingleTile(floorTilemap, floorTiles[4], tile);
-                }
+                int tileBase = Random.value <= 0.03f ? Random.Range(1, 3) : 0;
+                paintSingleTile(floorTilemap, floorTiles[tileBase], tile);
             }
         }
         public void paintSingleTile(Tilemap tilemap, TileBase tileBase, Vector2Int position) {
@@ -49,10 +45,10 @@ namespace Dungeon {
                     int cost = heatmap[x, y];
                     if (cost == -1) continue;
 
-                    float t = Mathf.Clamp01((float)cost / (float)maxCost);
+                    float t = Mathf.Clamp01((float) cost / maxCost);
                     Color color = Color.Lerp(lowCostColor, highCostColor, t);
                     
-                    heatmapTilemap.SetTile(new Vector3Int(x, y, 0), floorTiles[0]);
+                    heatmapTilemap.SetTile(new Vector3Int(x, y, 0), floorTiles[1]);
                     heatmapTilemap.SetTileFlags(new Vector3Int(x, y, 0), TileFlags.None);
                     heatmapTilemap.SetColor(new Vector3Int(x, y, 0), color);
                 }
