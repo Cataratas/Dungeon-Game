@@ -22,11 +22,12 @@ namespace Entities {
             
             var colliders = Physics2D.OverlapBoxAll(spikeTransform.position, Vector2.one, 0f);
             foreach (var collider in colliders) {
-                if (!collider.CompareTag("Player") && !collider.CompareTag("Enemy"))
-                    continue;
+                if (!collider.CompareTag("Player") && !collider.CompareTag("Enemy")) continue;
                 
                 var entity = collider.GetComponent<Character>();
-                if (entity != null) entity.Damage(damageAmount);
+                if (entity == null) continue;
+                
+                entity.Damage(damageAmount);
             }
         }
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {

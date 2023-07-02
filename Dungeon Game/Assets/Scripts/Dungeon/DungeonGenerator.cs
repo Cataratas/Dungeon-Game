@@ -59,11 +59,11 @@ namespace Dungeon {
                 var heatmapCost = getMinMaxHeatmap();
                 foreach (var room in dungeon.rooms) {
                     float cost = Mathf.Clamp01((float) heatmap[room.center.x, room.center.y] / heatmapCost.Item2);
-                    if (dungeon.exit != Vector2Int.zero || !room.data.playerCanExit || !(cost >= range))
+                    if (!room.data.playerCanExit || !(cost >= range))
                         continue;
+                    Instantiate(objects[1], new Vector3(room.center.x + 0.5f, room.center.y, 0), Quaternion.identity);
                     dungeon.exit = new Vector2Int(room.center.x, room.center.y);
                     room.exit = true;
-                    Debug.Log(dungeon.exit);
                     return;
                 }
                 range -= .01f;

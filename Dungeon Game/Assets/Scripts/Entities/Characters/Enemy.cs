@@ -19,7 +19,8 @@ namespace Entities.Characters {
             playerGameObject = GameObject.FindGameObjectWithTag("Player");
             target = playerGameObject.GetComponent<Transform>();
             player = playerGameObject.GetComponent<Player>();
-            
+
+            defaultSpeed = data.speed;
             health = data.maxHealth;
             damage = data.damage;
             speed = data.speed;
