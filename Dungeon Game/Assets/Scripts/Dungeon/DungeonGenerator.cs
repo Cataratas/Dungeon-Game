@@ -13,8 +13,7 @@ namespace Dungeon {
         [SerializeField] protected int roomQuantity = 25;
         [SerializeField] protected List<RoomData> roomTypes;
         [SerializeField] public List<GameObject> objects;
-        [SerializeField] protected int seed;
-        //[SerializeField] protected string seed;
+        [SerializeField] protected string seed;
         
         private const int HallwayWidth = 3;
         private const double PercentageOfEdges = .08;
@@ -24,11 +23,8 @@ namespace Dungeon {
 
         protected override void runProceduralGeneration() {
             dungeon = new Dungeon();
+            Random.InitState(seed != "" ? seed.GetHashCode() : Random.Range(int.MinValue, int.MaxValue));
 
-            int randomSeed = Random.Range(int.MinValue, int.MaxValue);
-            Random.InitState(seed != 0 ? seed : randomSeed);
-            Debug.Log(randomSeed);
-            
             generateRooms();
             generateHallways();
 

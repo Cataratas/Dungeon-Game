@@ -1,12 +1,19 @@
+using System;
 using UnityEngine;
 
 namespace Entities.Characters {
     public class Player : Character {
+        [SerializeField] protected float maxHealth;
+        [SerializeField] protected new float speed;
         private Vector2 move;
         private Rigidbody2D rigidBody;
         private SpriteRenderer spriteRenderer;
         private HealthBar healthBar;
 
+        private void Awake() {
+            health = maxHealth;
+        }
+        
         private void Start() {
             rigidBody = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
