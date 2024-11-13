@@ -37,11 +37,13 @@ namespace Dungeon {
             generateHeatmap(new Vector2Int(spawnPoint.x, spawnPoint.y), tiles);
             setExit();
 
+            var enemyParent = GameObject.FindWithTag("Enemy Group").transform;
+            var objectParent = GameObject.FindWithTag("Object Group").transform;
             foreach (var room in dungeon.rooms) {
                 if (!room.exit && Random.value < room.data.treasureRoomChance)
                     populateTreasureRoom(room);
                 else
-                    populateRoom(room, spawnPoint);
+                    populateRoom(room, spawnPoint, enemyParent, objectParent);
             }
             
             tilemap.paintFloorTiles(tiles);
@@ -70,7 +72,7 @@ namespace Dungeon {
             
         }
 
-        private void populateRoom(Room room, Point spawnPoint) {
+        private void populateRoom(Room room, Point spawnPoint, Transform enemyParent, Transform objectParent) {
             var chestCount = 0;
 
             int chestAmount = Random.Range(room.data.minChestAmount, room.data.maxChestAmount);
@@ -79,7 +81,7 @@ namespace Dungeon {
                 var pos = room.floors.ElementAt(Random.Range(0, room.floors.Count));
                 if (dungeon.hallways.Contains(pos) || hasAllNeighbors(pos) || !room.floors.Contains(pos + Vector2Int.down))
                     continue;
-                Instantiate(room.data.chest, new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
+                Instantiate(room.data.chest, new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity, objectParent);
                 chestCount++;
             }
             if (room.center.Equals(spawnPoint))
@@ -101,7 +103,7 @@ namespace Dungeon {
                 if (!hasAllNeighbors(room, pos))
                     continue;
                 
-                Instantiate(enemyList[Random.Range(0, enemyList.Count)], new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity);
+                Instantiate(enemyList[Random.Range(0, enemyList.Count)], new Vector3(pos.x + .5f, pos.y + .5f, 0), Quaternion.identity, enemyParent);
                 count++;
             }
         }

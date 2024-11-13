@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Dungeon.Utils.unity_delaunay_mst.Assets.Scripts.DungeonGen;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Dungeon {
@@ -14,7 +15,7 @@ namespace Dungeon {
             public readonly HashSet<Vector2Int> hallways = new HashSet<Vector2Int>();
             public readonly HashSet<Point> centers = new HashSet<Point>();
             public Vector2Int exit = Vector2Int.zero;
-
+            
             public void AddRoom(Room room) {
                 rooms.Add(room);
                 centers.Add(room.center);
@@ -50,13 +51,13 @@ namespace Dungeon {
         }
 
         // TODO: Find another way to reference and destroy gameObjects
-        public void generateDungeon() {
-            var players = GameObject.FindGameObjectsWithTag("Player");
-            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            var objects = GameObject.FindGameObjectsWithTag("Object");
-            foreach (var player in players) DestroyImmediate(player);
-            foreach (var enemy in enemies) DestroyImmediate(enemy);
-            foreach (var obj in objects) DestroyImmediate(obj);
+        public void generateDungeon()
+        {
+            foreach (var child in GameObject.FindGameObjectsWithTag("Enemy")) DestroyImmediate(child);
+            foreach (var child in GameObject.FindGameObjectsWithTag("Spike")) DestroyImmediate(child);
+            foreach (var child in GameObject.FindGameObjectsWithTag("Object")) DestroyImmediate(child);
+            foreach (var child in GameObject.FindGameObjectsWithTag("Player")) DestroyImmediate(child);
+            foreach (var child in GameObject.FindGameObjectsWithTag("Portal")) DestroyImmediate(child);
             
             tilemap.clear();
             runProceduralGeneration();

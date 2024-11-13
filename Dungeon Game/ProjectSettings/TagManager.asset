@@ -4,9 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - Object
   - Health Bar
+  - Enemy Group
+  - Spike Group
+  - Object Group
+  - Enemy
+  - Spike
+  - Object
+  - Undefined
+  - Portal
   layers:
   - Default
   - TransparentFX
