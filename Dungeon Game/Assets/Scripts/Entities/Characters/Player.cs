@@ -17,7 +17,7 @@ namespace Entities.Characters {
         private void Start() {
             rigidBody = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
-            healthBar = GameObject.FindWithTag("Health Bar").GetComponentInChildren<HealthBar>();
+            healthBar = GameObject.FindGameObjectWithTag("Health Bar").GetComponentInChildren<HealthBar>();
             healthBar.setHealth(maxHealth, health);
         }
 
